@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import GameplayKit
 
 
 class ViewController: UIViewController {
@@ -33,8 +34,8 @@ class ViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         else {
-            let lBF: UInt32 = UInt32(lowerBoundField.text!)!
-            let uBF: UInt32 = UInt32(upperBoundField.text!)!
+            let lBF: Int = Int(lowerBoundField.text!)!
+            let uBF: Int = Int(upperBoundField.text!)!
             var randField: String = "Result: "
             
             randField += generateRand(with: lBF, and: uBF)
@@ -49,10 +50,10 @@ class ViewController: UIViewController {
         
     }
     
-    func generateRand(with lower: UInt32, and upper: UInt32) -> String{
+    func generateRand(with lower: Int, and upper: Int) -> String{
     
-        
-        return String(arc4random_uniform(upper) + lower);
+        let randomNum = GKRandomDistribution(lowestValue : lower, highestValue: upper)
+        return randomNum.nextInt().description;
         
     }
 
